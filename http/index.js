@@ -1,6 +1,10 @@
 const http = require('http');
-
+const fs = require('fs')
 var server = http.createServer((req,res)=>{
+
+const data = fs.readFileSync(`${__dirname}/api/data.json`,'utf-8');
+const objData = JSON.parse(data);
+
    if(req.url == '/')
    {
       res.statusCode = 200;
@@ -18,6 +22,10 @@ var server = http.createServer((req,res)=>{
       res.statusCode = 200;
       res.write("<h1>Contact Page</h1>");
       console.log(req.url);
+   }
+   else if(req.url == '/userapi')
+   {
+     res.end(objData[1].id);
    }
    else
    {
