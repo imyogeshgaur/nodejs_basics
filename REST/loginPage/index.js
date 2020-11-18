@@ -8,7 +8,12 @@ const templatePath = path.join(__dirname,'./Templates/views');
 const partialsPath = path.join(__dirname,'./Templates/partials');
 const staticPath = path.join(__dirname,"./public");
 const employeeRouter = require('./Router/employeeRoutes');
+const connectDb = require('./Db/connection')
 
+//Connection
+connectDb()
+
+//Template Engine
 app.set('views engine',hbs);
 app.set('views',templatePath)
 hbs.registerPartials(partialsPath)
