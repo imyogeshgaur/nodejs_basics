@@ -20,6 +20,12 @@ app.use(express.urlencoded({extended:false}));
 app.get('/',async(req,res)=>{
     res.render('index.hbs')
 });
+app.get('/login', async(req,res)=>{
+    res.render('login.hbs')
+})
+app.get('/signup', async(req,res)=>{
+    res.render('signup.hbs')
+})
 // app.post('/',async(req,res)=>{});
 
 app.listen(PORT,()=>{console.log("Server is Running !!!")})
