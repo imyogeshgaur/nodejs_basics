@@ -7,7 +7,7 @@ const PORT = process.env.PORT||5000;
 const templatePath = path.join(__dirname,'./Templates/views');
 const partialsPath = path.join(__dirname,'./Templates/partials');
 const staticPath = path.join(__dirname,"./public");
-
+const employeeRouter = require('./Router/employeeRoutes');
 
 app.set('views engine',hbs);
 app.set('views',templatePath)
@@ -16,19 +16,7 @@ hbs.registerPartials(partialsPath)
 //MiddleWares
 app.use(express.static(staticPath));
 app.use(express.urlencoded({extended:false}));
+app.use(employeeRouter);
 
-app.get('/',async(req,res)=>{
-    res.render('index.hbs')
-});
-app.get('/index',async(req,res)=>{
-    res.render('index.hbs')
-});
-app.get('/login', async(req,res)=>{
-    res.render('login.hbs')
-})
-app.get('/signup', async(req,res)=>{
-    res.render('signup.hbs')
-})
-// app.post('/',async(req,res)=>{});
 
 app.listen(PORT,()=>{console.log("Server is Running !!!")})
