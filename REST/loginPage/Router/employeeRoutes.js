@@ -31,6 +31,21 @@ router.post("/signup", async (req, res) => {
     res.status(500).send("Server Error !!!");
   }
 });
-router.post("/login", async (req, res) => {});
+router.post("/login", async (req, res) => {
+    try {
+        const email = req.body.employeeEmail;
+        const password = req.body.password;
+         
+        const userbyemail = await Employee.findOne({email});
+    
+        if(userbyemail.password === password){
+            res.status(200).send('index.hbs');
+        }else{
+            res.status(400).send("Invalid Details!!!")
+        }
+       } catch (error) {
+           res.status(500).send('Error Occured in server !!!')
+       }
+});
 
 module.exports = router;
