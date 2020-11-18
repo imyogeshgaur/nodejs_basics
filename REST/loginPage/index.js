@@ -20,6 +20,9 @@ app.use(express.urlencoded({extended:false}));
 app.get('/',async(req,res)=>{
     res.render('index.hbs')
 });
+app.get('/index',async(req,res)=>{
+    res.render('index.hbs')
+});
 app.get('/login', async(req,res)=>{
     res.render('login.hbs')
 })
