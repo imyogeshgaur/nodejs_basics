@@ -12,8 +12,8 @@ const employeeSchema = mongoose.Schema({
     },
     phone:{
         type:String,
-        required:[true,"This is a Required Data"],
         minlength:10,
+        required:[true,"This is a Required Data"],
         default:"9999999999"
     },
     department:{
@@ -23,11 +23,8 @@ const employeeSchema = mongoose.Schema({
     },
     password:{
         type:String,
-        minlength:8
-    },
-    cpassword:{
-        type:String,
-        minlength:8
+        minlength:8,
+        required:[true,"This is a Required Data"]
     }
 });
 

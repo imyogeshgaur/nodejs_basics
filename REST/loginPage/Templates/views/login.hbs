@@ -10,15 +10,14 @@
 
 <body>
     {{>NavBar}}
-    <form action="/login" action="POST" class="justify-content-center align-items-center m-4">
+    <form action="/login" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="text" class="form-control" id="employeeName" aria-describedby="emailHelp"
-            name="employeeName">
+            <input type="text" class="form-control" id="emailOfUser" name="emailOfUser" aria-describedby="emailHelp">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="passwordOfUser" name="passwordOfUser">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

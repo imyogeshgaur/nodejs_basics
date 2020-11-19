@@ -1,4 +1,3 @@
-const { Router } = require('express');
 const express = require('express');
 const hbs = require('hbs');
 const path = require('path');
@@ -20,6 +19,7 @@ hbs.registerPartials(partialsPath)
 
 //MiddleWares
 app.use(express.static(staticPath));
+app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(employeeRouter);
 

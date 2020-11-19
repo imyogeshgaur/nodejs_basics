@@ -8,6 +8,7 @@ const connectDb = async () => {
       useFindAndModify: false,
       useCreateIndex: true,
     });
+    console.log("Connected Sucessfully !!!");
   } catch (error) {
     console.log("Error Occured in Connection !!");
   }

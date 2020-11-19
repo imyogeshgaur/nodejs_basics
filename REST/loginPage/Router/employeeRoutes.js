@@ -17,25 +17,29 @@ router.get("/signup", async (req, res) => {
 });
 router.post("/signup", async (req, res) => {
   try {
-    const newEmployee = new Employee({
-      name: req.body.employeeName,
-      email: req.body.employeeEmail,
-      phone: req.body.employeePhone,
-      department: req.body.employeeDepartment,
-      password: req.body.password,
-      cpassword: req.body.cPassword,
-    });
-    await newEmployee.save();
-    res.status(201).render("signup.hbs");
+    const pass = req.body.passwordOfUser;
+    const cpass = req.body.cPassword;
+    if (pass === cpass) {
+      const newUser = new Employee({
+        name: req.body.nameOfUser,
+        email: req.body.emailOfUser,
+        phone: req.body.phoneOfUser,
+        department: req.body.departmentOfUser,
+        password: req.body.passwordOfUser,
+      });
+      await newUser.save();
+      res.status(201).render("index.hbs");
+    }
   } catch (error) {
-    res.status(500).send("Server Error !!!");
+    console.log(error);
+    res.status(500).send("Error Occured !!!");
   }
 });
 router.post("/login", async (req, res) => {
     try {
-        const email = req.body.employeeEmail;
-        const password = req.body.password;
-         
+        const email = req.body.emailOfUser;
+        const password = req.body.passwordOfUser;
+        console.log(email);
         const userbyemail = await Employee.findOne({email});
     
         if(userbyemail.password === password){
