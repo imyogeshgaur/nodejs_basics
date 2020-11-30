@@ -28,8 +28,12 @@ router.post("/signup", async (req, res) => {
         department: req.body.departmentOfUser,
         password: req.body.passwordOfUser,
       });
-      await newUser.generateToken();
+      const token = await newUser.generateToken();
       await newUser.save();
+      res.cookie("jwt",token,{
+        expires:new Date(Date.now()+3000),
+        httpOnly:true
+      })
       res.status(201).render("welcome.hbs");
     } else {
       res.status(403).render("signup.hbs");
