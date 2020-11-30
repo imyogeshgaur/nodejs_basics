@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const employeeSchema = mongoose.Schema({
   name: {
@@ -27,6 +29,14 @@ const employeeSchema = mongoose.Schema({
     minlength: 8,
     required: [true, "This is a Required Data"],
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 employeeSchema.pre("save", async function (next) {
@@ -36,4 +46,14 @@ employeeSchema.pre("save", async function (next) {
   }
 });
 
+employeeSchema.methods.generateToken = async function () {
+  try {
+    const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({ token: token }); //can be represented as {token} by array destructuring
+    await this.save();
+    return token;
+  } catch (error) {
+    console.log("Error Occured!!!");
+  }
+};
 module.exports = Employee = mongoose.model("Employee", employeeSchema);

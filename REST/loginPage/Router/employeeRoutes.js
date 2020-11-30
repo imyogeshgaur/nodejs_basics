@@ -28,6 +28,7 @@ router.post("/signup", async (req, res) => {
         department: req.body.departmentOfUser,
         password: req.body.passwordOfUser,
       });
+      await newUser.generateToken();
       await newUser.save();
       res.status(201).render("welcome.hbs");
     } else {
@@ -38,12 +39,13 @@ router.post("/signup", async (req, res) => {
     res.status(500).send("Error Occured !!!");
   }
 });
+
 router.post("/login", async (req, res) => {
   try {
     const email = req.body.emailOfUser;
     const password = req.body.passwordOfUser;
     const userbyemail = await Employee.findOne({ email });
-
+    await userbyemail.generateToken();
     if (bcrypt.compare(password, userbyemail.password)) {
       res.status(200).render("welcome.hbs");
     } else {
